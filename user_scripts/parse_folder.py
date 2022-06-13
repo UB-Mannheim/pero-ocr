@@ -37,7 +37,7 @@ def parse_arguments():
     parser.add_argument('--output-logit-path', help='')
     parser.add_argument('--output-alto-path', help='')
     parser.add_argument('--output-transcriptions-file-path', help='')
-    parser.add_argument('--skipp-missing-xml', action='store_true', help='Skip images which have missing xml.')
+    parser.add_argument('--skip-missing-xml', action='store_true', help='Skip images which have missing xml.')
 
     parser.add_argument('--device', choices=["gpu", "cpu"], default="gpu")
     parser.add_argument('--gpu-id', type=int, default=None, help='If set, the computation runs of the specified GPU, otherwise safe-gpu is used to allocate first unused GPU.')
@@ -314,7 +314,7 @@ def main():
             images_to_process = [image for id, image in zip(ids_to_process, images_to_process) if id not in already_processed_files]
             ids_to_process = [id for id in ids_to_process if id not in already_processed_files]
 
-    if input_xml_path and args.skipp_missing_xml:
+    if input_xml_path and args.skip_missing_xml:
         filtered_ids_to_process = []
         filtered_images_to_process = []
         for file_id, image_file_name in zip(ids_to_process, images_to_process):
